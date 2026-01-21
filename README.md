@@ -90,9 +90,9 @@ In-depth documentation can be found here: https://superflytv.github.io/sofie-dem
 For developers, the installation steps are as follows:
 
 ```sh
-git clone https://github.com/SuperFlyTV/sofie-demo-blueprints.git
+git clone https://github.com/KGWN-Projects/sofie-KGWN-blueprints.git
 yarn
-yarn dist
+yarn build:blueprints
 ```
 
 The `dist/*-bundle.js` files can then be uploaded, assigned, and configured in the Sofie UI.
