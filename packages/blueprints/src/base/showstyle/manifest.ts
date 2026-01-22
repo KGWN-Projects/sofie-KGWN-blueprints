@@ -5,7 +5,7 @@ import {
 	JSONSchema,
 	IRundownActivationContext,
 } from '@sofie-automation/blueprints-integration'
-import { executeAction, executeDataStoreAction } from './executeActions/index.js'
+import {} from './executeActions/index.js'
 import { getAdlibItem } from './getAdlibItem.js'
 import { getSegment } from './getSegment.js'
 import { getShowStyleVariantId } from './getShowStyleVariantId.js'
@@ -32,8 +32,6 @@ export const baseManifest: Omit<ShowStyleBlueprintManifest<ShowStyleConfig>, 'bl
 	getRundown,
 	getSegment,
 	getAdlibItem,
-	executeAction,
-	executeDataStoreAction,
 
 	getAbResolverConfiguration,
 	// translations: __TRANSLATION_BUNDLES__,

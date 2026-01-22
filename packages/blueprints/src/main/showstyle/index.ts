@@ -7,7 +7,7 @@ import { getShowStyleConfigPreset } from './configPresets.js'
 const manifest: ShowStyleBlueprintManifest<ShowStyleConfig> = {
 	...baseManifest,
 
-	blueprintId: 'demo-main-showstyle',
+	blueprintId: 'KGWN-main-showstyle',
 
 	configPresets: getShowStyleConfigPreset(),
 }

@@ -7,11 +7,10 @@ import {
 	PlaylistTimingType,
 } from '@sofie-automation/blueprints-integration'
 import { literal } from '../../../common/util.js'
-import { SpreadsheetIngestRundown } from '../../../code-copy/spreadsheet-gateway/index.js'
 import { RundownMetadata } from '../helpers/metadata.js'
 import { getBaseline } from './baseline.js'
-import { getGlobalActions } from './globalActions.js'
-import { getGlobalAdlibs } from './globalAdlibs.js'
+import {} from './globalActions.js'
+import {} from './globalAdlibs.js'
 
 export function getRundown(
 	context: IShowStyleUserContext,
@@ -41,19 +40,10 @@ export function getRundown(
 
 	const res: BlueprintResultRundown = {
 		rundown,
-		globalAdLibPieces: getGlobalAdlibs(context),
-		globalActions: getGlobalActions(context, ingestRundown),
 		baseline: getBaseline(context),
 	}
 
-	if (ingestRundown.payload) {
-		const payload = ingestRundown.payload as SpreadsheetIngestRundown
-		// Guard against missing or faulty payload:
-		if ((payload.externalId, payload.name, payload.expectedStart, payload.expectedEnd)) {
-			timing.expectedStart = payload.expectedStart
-			timing.expectedDuration = payload.expectedEnd - payload.expectedStart
-		}
-	}
+	if (ingestRundown.payload) {}
 
 	context.logDebug('res' + JSON.stringify(res))
 
