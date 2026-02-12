@@ -5,7 +5,6 @@ import {
 	ISegmentUserContext,
 	IShowStyleContext,
 	ISourceLayer,
-	PackageInfo,
 } from '@sofie-automation/blueprints-integration'
 
 export function isPartContext(context: IShowStyleContext): context is PartContext {
@@ -39,7 +38,7 @@ export class PartContext implements ISegmentUserContext {
 		return this.baseContext.getShowStyleOutputLayers()
 	}
 
-	public getPackageInfo(_packageId: string): PackageInfo.Any[] {
+	public getPackageInfo(_packageId: string): any[] {
 		return []
 	}
 
