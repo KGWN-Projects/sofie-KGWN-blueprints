@@ -44,7 +44,7 @@
 			"prettier --write"
 		],
 		"*.{ts,tsx,js,jsx}": [
-			"yarn lint:raw --fix"
+			"eslint --fix"
 		]
 	}
 }
