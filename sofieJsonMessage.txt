@@ -1,0 +1,32 @@
+{
+  "type": "roStorySend",
+  "roID": "KGWN-ENPS01;P_KGWNNEWS\\W;59EAC70E-60E9-46DA-987D-B48990D74EA1",
+  "storyID": "...",
+  "storySlug": "SHOW OPEN-SOT OPEN",
+  "storyNum": "A1",
+  "storyBody": {
+    "storyItem": [
+      {
+        "mosID": "imagine.nexio.kgwn.mos",
+        "mosAbstract": "WY_Newsnow_Open 0:16",
+        "itemSlug": "WY_Newsnow_Open",
+        "objID": "WY_Newsnow_Open",
+        "itemID": "2",
+        "objDur": 930,           // milliseconds
+        "objTB": 60,
+        "objSlug": "WY_Newsnow_Open",
+        "objPaths": {
+          "objPath": "ftp://10.48.96.139/MXF/WY_Newsnow_Open.mxf"
+        }
+      }
+      // ... can have multiple items
+    ]
+  },
+  "mosExternalMetadata": {
+    "mosPayload": {
+      "MOSItemDurations": "16",  // total duration in seconds
+      "ENPSItemType": "3",
+      // ... other metadata
+    }
+  }
+}
