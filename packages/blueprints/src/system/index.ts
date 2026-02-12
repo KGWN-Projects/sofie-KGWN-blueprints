@@ -5,7 +5,7 @@ const manifest: SystemBlueprintManifest = {
 
 	coreMigrations: [],
 
-	blueprintId: 'sofie-KGWN-system',
+	blueprintId: 'sofie-demo-system',
 	blueprintVersion: __VERSION__,
 	integrationVersion: __VERSION_INTEGRATION__,
 	TSRVersion: __VERSION_TSR__,

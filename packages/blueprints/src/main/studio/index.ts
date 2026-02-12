@@ -6,7 +6,7 @@ import { StudioConfigPresets } from './configs/index.js'
 const manifest: StudioBlueprintManifest<StudioConfig> = {
 	...baseManifest,
 
-	blueprintId: 'demo-KGWN-studio',
+	blueprintId: 'demo-main-studio',
 
 	configPresets: StudioConfigPresets,
 }

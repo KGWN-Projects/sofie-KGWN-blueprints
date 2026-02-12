@@ -4,7 +4,7 @@ import { DemoStudioConfig } from './demo.js'
 
 export const demoStudioConfigPresets: Record<string, IStudioConfigPreset<StudioConfig>> = {
 	demo: {
-		name: 'KGWN Main Studio',
+		name: 'Demo Main Studio',
 		config: DemoStudioConfig,
 	},
 }

@@ -1,0 +1,57 @@
+{"source":"incoming","type":"recieved","rawMessage":"
+<mos>\r\n
+	<mosID>sofie.mos</mosID>\r\n
+	<ncsID>KGWN-ENPS01</ncsID>\r\n
+	<messageID>2</messageID>\r\n
+	<mosMsgNum>2</mosMsgNum>\r\n
+	<roStorySend>\r\n
+		<roID>KGWN-ENPS01;P_KGWNNEWS\\W;59EAC70E-60E9-46DA-987D-B48990D74EA1</roID>\r\n
+		<storyID>KGWN-ENPS01;P_KGWNNEWS\\W\\R_59EAC70E-60E9-46DA-987D-B48990D74EA1;3F249AE0-5CF2-4589-BBE0-1743D2766F79</storyID>\r\n
+		<storySlug>SHOW OPEN-SOT OPEN</storySlug>\r\n
+		<storyNum>A1</storyNum>\r\n
+		<storyBody>
+			<p>[TAKE VO]</p>\r\n
+			<p>{***VO***}</p>
+			<storyItem>
+				<mosID>imagine.nexio.kgwn.mos</mosID>
+				<mosAbstract>WY_Newsnow_Open 0:16</mosAbstract>
+				<mosItemEditorProgID>NXMB.NXMBCtrl.1</mosItemEditorProgID>
+				<itemSlug>WY_Newsnow_Open</itemSlug>
+				<objID>WY_Newsnow_Open</objID>
+				<itemID>2</itemID>
+				<objDur>930</objDur>
+				<objTB>60</objTB>
+				<objSlug>WY_Newsnow_Open</objSlug>
+				<objPaths>
+					<objPath techDescription=\"XDCAM EX\">ftp://10.48.96.139/MXF/WY_Newsnow_Open.mxf</objPath>
+					<objMetadataPath></objMetadataPath>
+				</objPaths>
+			</storyItem>
+			<p></p>
+		</storyBody>\r\n
+		<mosExternalMetadata>\r\n
+			<mosScope>PLAYLIST</mosScope>\r\n
+			<mosSchema>http://KGWN-ENPS01:10505/schema/enps.dtd</mosSchema>\r\n
+			<mosPayload>\r\n
+				<Actual>0</Actual>\r\n
+				<Approved>0</Approved>\r\n
+				<CreatedDateTime>20260212T071025Z</CreatedDateTime>\r\n
+				<Creator>ADMINISTRATOR</Creator>\r\n
+				<MediaTime>0</MediaTime>\r\n
+				<ModBy>MATT.ENTREKIN</ModBy>\r\n
+				<ModTime>20260212T120027Z</ModTime>\r\n
+				<MOSItemDurations>16</MOSItemDurations>\r\n
+				<MOSObjSlugs>WY_Newsnow_Open</MOSObjSlugs>\r\n
+				<MOSSlugs>WY_Newsnow_Open</MOSSlugs>\r\n
+				<Owner>ADMINISTRATOR</Owner>\r\n
+				<PageNum>A1</PageNum>\r\n
+				<pubApproved>0</pubApproved>\r\n
+				<SourceMediaTime>0</SourceMediaTime>\r\n
+				<SourceTextTime>0</SourceTextTime>\r\n
+				<TextTime>0</TextTime>\r\n
+				<RevisionNumber>13</RevisionNumber>\r\n
+				<ENPSItemType>3</ENPSItemType>\r\n
+			</mosPayload>\r\n
+		</mosExternalMetadata>\r\n
+	</roStorySend>\r\n
+</mos>\r\n","level":"debug","message":"rawMessage"}

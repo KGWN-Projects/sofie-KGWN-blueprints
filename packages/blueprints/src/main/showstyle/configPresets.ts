@@ -5,7 +5,7 @@ import { demoVariants } from './variants/demo.js'
 
 export const ShowStyleConfigPreset: Record<string, IShowStyleConfigPreset<ShowStyleConfig>> = {
 	demo: {
-		name: 'KGWN',
+		name: 'Demo',
 		config: demoShowStyleConfigDefaults,
 		variants: demoVariants,
 	},

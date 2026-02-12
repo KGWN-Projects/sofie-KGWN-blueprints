@@ -2,7 +2,7 @@ import { BlueprintResultApplyShowStyleConfig, ICommonContext } from '@sofie-auto
 import { ShowStyleConfig } from '../../../$schemas/generated/main-showstyle-config.js'
 import { getOutputLayer } from './outputlayers.js'
 import { getSourceLayer } from './sourcelayers.js'
-import {} from './triggered-actions.js'
+import { getTriggeredActions } from './triggered-actions.js'
 
 export function applyConfig(
 	_context: Readonly<ICommonContext>,
@@ -12,5 +12,6 @@ export function applyConfig(
 	return {
 		sourceLayers: getSourceLayer(),
 		outputLayers: getOutputLayer(),
+		triggeredActions: getTriggeredActions(),
 	}
 }
