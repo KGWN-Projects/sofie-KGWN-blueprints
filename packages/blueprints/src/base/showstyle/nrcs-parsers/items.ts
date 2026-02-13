@@ -32,7 +32,7 @@ export function detectNrcsPartType(item: NrcsStoryItem, storySlug: string): Part
 	// Graphics/VT sources (video files)
 	if (mosID.includes('imagine.nexio')) {
 		// Check if it's a stinger/animation vs regular VT
-		if (itemSlugLower.match(/stinger|bump|animation|open/) || storySlugLower.match(/stinger|bump|open/)) {
+		if (itemSlugLower.match(/stinger|bump|animation/) || storySlugLower.match(/stinger|bump/)) {
 			return PartType.GFX
 		}
 		return PartType.VT
