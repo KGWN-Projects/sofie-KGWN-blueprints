@@ -66,6 +66,7 @@ export interface RemoteProps extends PartBaseProps {
 
 export interface VTProps extends PartBaseProps {
 	clipProps: ClipProps
+	vtIndex?: number
 }
 
 export interface VOProps extends PartBaseProps {

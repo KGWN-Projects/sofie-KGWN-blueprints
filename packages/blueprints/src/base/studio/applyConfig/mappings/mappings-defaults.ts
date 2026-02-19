@@ -15,8 +15,8 @@ export default literal<BlueprintMappings>({
 	[CasparCGLayers.CasparCGClipPlayer1]: literal<BlueprintMapping<TSR.MappingCasparCGLayer>>({
 		device: TSR.DeviceType.CASPARCG,
 		deviceId: 'casparcg0',
-		lookahead: LookaheadMode.NONE,
-
+		lookahead: LookaheadMode.PRELOAD,
+		lookaheadMaxSearchDistance: 1,
 		options: {
 			mappingType: TSR.MappingCasparCGType.Layer,
 			channel: 1,
@@ -26,19 +26,20 @@ export default literal<BlueprintMappings>({
 	[CasparCGLayers.CasparCGClipPlayer2]: literal<BlueprintMapping<TSR.MappingCasparCGLayer>>({
 		device: TSR.DeviceType.CASPARCG,
 		deviceId: 'casparcg0',
-		lookahead: LookaheadMode.NONE,
-
+		lookahead: LookaheadMode.PRELOAD,
+		lookaheadMaxSearchDistance: 1,
 		options: {
 			mappingType: TSR.MappingCasparCGType.Layer,
 			channel: 2,
-			layer: 110,
+			layer: 111,
 		},
 	}),
 
 	[CasparCGLayers.CasparCGClipPlayerPreview]: literal<BlueprintMapping<TSR.MappingCasparCGLayer>>({
 		device: TSR.DeviceType.CASPARCG,
 		deviceId: 'casparcg0',
-		lookahead: LookaheadMode.NONE,
+		lookahead: LookaheadMode.WHEN_CLEAR,
+		lookaheadMaxSearchDistance: 1,
 		options: {
 			mappingType: TSR.MappingCasparCGType.Layer,
 			channel: 1,

@@ -31,10 +31,6 @@ export function detectNrcsPartType(item: NrcsStoryItem, storySlug: string): Part
 
 	// Graphics/VT sources (video files)
 	if (mosID.includes('imagine.nexio')) {
-		// Check if it's a stinger/animation vs regular VT
-		if (itemSlugLower.match(/stinger|bump|animation/) || storySlugLower.match(/stinger|bump/)) {
-			return PartType.GFX
-		}
 		return PartType.VT
 	}
 
@@ -53,9 +49,15 @@ export function detectNrcsPartType(item: NrcsStoryItem, storySlug: string): Part
 }
 
 /**
+ * Global VT index across the entire rundown.
+ * First VT seen → 0, second VT → 1, etc.
+ */
+let globalVtIndex = 0
+
+/**
  * Parse a VT (video) item from NRCS
  */
-export function parseNrcsVT(_context: IRundownUserContext, item: NrcsStoryItem): PartProps<VTProps> {
+export function parseNrcsVT(_context: IRundownUserContext, item: NrcsStoryItem, vtIndex: number): PartProps<VTProps> {
 	// Extract filename from objPath or use itemSlug
 	let fileName = item.itemSlug
 	if (item.objPaths?.objPath) {
@@ -77,6 +79,7 @@ export function parseNrcsVT(_context: IRundownUserContext, item: NrcsStoryItem):
 		duration: durationMs, // PartProps expects milliseconds
 		name: item.itemSlug,
 		clipProps,
+		vtIndex, // sequential index across rundown
 	}
 
 	return {
@@ -91,15 +94,11 @@ export function parseNrcsVT(_context: IRundownUserContext, item: NrcsStoryItem):
 
 /**
  * Parse a Camera item from NRCS
- * This is typically a studio setup with a camera number embedded in the item slug
  */
 export function parseNrcsCamera(_context: IRundownUserContext, item: NrcsStoryItem): PartProps<CameraProps> {
-	// Try to extract camera number from slug (e.g., "2SHOT" -> camera 2)
 	const cameraMatch = (item.itemSlug + item.objSlug).match(/(\d+)/)
-	const cameraNum = cameraMatch ? Math.min(Math.max(parseInt(cameraMatch[1]), 1), 5) : 1 // Clamp between 1-5
+	const cameraNum = cameraMatch ? Math.min(Math.max(parseInt(cameraMatch[1]), 1), 5) : 1
 
-	// Use mosDurationSeconds (from MOSItemDurations) as authoritative source
-	// If not available, calculate from objDur/objTB
 	const durationSeconds = item.mosDurationSeconds || (item.objDur && item.objTB ? item.objDur / item.objTB : 0)
 	const durationMs = durationSeconds * 1000
 
@@ -127,17 +126,11 @@ export function parseNrcsCamera(_context: IRundownUserContext, item: NrcsStoryIt
 
 /**
  * Parse a Graphics/Stinger item from NRCS
- * These are typically short animations or overlays
- * For now, treat as camera placeholder - will be refined with graphics details later
  */
 export function parseNrcsGfx(_context: IRundownUserContext, item: NrcsStoryItem): PartProps<CameraProps> {
-	// Use mosDurationSeconds (from MOSItemDurations) as authoritative source
-	// If not available, calculate from objDur/objTB
 	const durationSeconds = item.mosDurationSeconds || (item.objDur && item.objTB ? item.objDur / item.objTB : 0)
 	const durationMs = durationSeconds * 1000
 
-	// Placeholder: Graphics items will be properly parsed when detailed item properties arrive
-	// For now, return a camera part so the segment displays
 	const source: RawSourceInfo = {
 		type: SourceType.Camera,
 		id: 1,
@@ -161,18 +154,15 @@ export function parseNrcsGfx(_context: IRundownUserContext, item: NrcsStoryItem)
 }
 
 /**
- * Parse a Remote/SOT (Sound on Tape) item from NRCS
- * This is typically a remote feed with audio
+ * Parse a Remote/SOT item from NRCS
  */
 export function parseNrcsRemote(_context: IRundownUserContext, item: NrcsStoryItem): PartProps<CameraProps> {
-	// Use mosDurationSeconds (from MOSItemDurations) as authoritative source
-	// If not available, calculate from objDur/objTB
 	const durationSeconds = item.mosDurationSeconds || (item.objDur && item.objTB ? item.objDur / item.objTB : 0)
 	const durationMs = durationSeconds * 1000
 
 	const source: RawSourceInfo = {
 		type: SourceType.Remote,
-		id: 1, // Default remote source
+		id: 1,
 	}
 
 	const remoteProps: CameraProps = {
@@ -201,8 +191,12 @@ export function parseNrcsItem(context: IRundownUserContext, item: NrcsStoryItem,
 	context.logDebug(`NRCS item "${item.itemSlug}" detected as type: ${partType}`)
 
 	switch (partType) {
-		case PartType.VT:
-			return parseNrcsVT(context, item)
+		case PartType.VT: {
+			const currentIndex = globalVtIndex
+			globalVtIndex += 1
+			context.logInfo(`NRCS VT index debug (global): item="${item.itemSlug}", vtIndex=${currentIndex}`)
+			return parseNrcsVT(context, item, currentIndex)
+		}
 		case PartType.GFX:
 			return parseNrcsGfx(context, item)
 		case PartType.Camera:
@@ -210,7 +204,6 @@ export function parseNrcsItem(context: IRundownUserContext, item: NrcsStoryItem,
 		case PartType.Remote:
 			return parseNrcsRemote(context, item)
 		default:
-			// Return as camera by default to ensure segment displays
 			context.logWarning(`Unknown NRCS item type for "${item.itemSlug}", defaulting to camera`)
 			return parseNrcsCamera(context, item)
 	}
