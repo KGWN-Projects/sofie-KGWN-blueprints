@@ -24,6 +24,10 @@ function pickClipLayerForVT(vtIndex: number): CasparCGLayers {
 	return vtIndex % 2 === 0 ? CasparCGLayers.CasparCGClipPlayer1 : CasparCGLayers.CasparCGClipPlayer2
 }
 
+function pickSourceLayerForVT(vtIndex: number): SourceLayer {
+	return vtIndex % 2 === 0 ? SourceLayer.VT1 : SourceLayer.VT2
+}
+
 export function generateVTPart(context: PartContext, part: PartProps<VTProps>): BlueprintResultPart {
 	const config = parseConfig(context).studio
 	const visionMixerInput = getClipPlayerInput(config)
@@ -31,6 +35,7 @@ export function generateVTPart(context: PartContext, part: PartProps<VTProps>): 
 	// Use vtIndex if present; default to 0 so we always have a number
 	const vtIndex = part.payload.vtIndex ?? 0
 	const clipLayer = pickClipLayerForVT(vtIndex)
+	const pickedsourceLayer = pickSourceLayerForVT(vtIndex)
 	context.logInfo(
 		`VT routing debug: extId=${part.payload.externalId}, file=${part.payload.clipProps.fileName}, vtIndex=${vtIndex}, clipLayer=${clipLayer}`
 	)
@@ -42,9 +47,9 @@ export function generateVTPart(context: PartContext, part: PartProps<VTProps>): 
 		},
 		externalId: part.payload.externalId,
 		name: `${part.payload.clipProps?.fileName || 'Missing file name'}`,
-		lifespan: PieceLifespan.WithinPart,
-		sourceLayerId: SourceLayer.VT,
-		outputLayerId: getOutputLayerForSourceLayer(SourceLayer.VT),
+		lifespan: PieceLifespan.OutOnRundownEnd,
+		sourceLayerId: pickedsourceLayer,
+		outputLayerId: getOutputLayerForSourceLayer(pickedsourceLayer),
 
 		// No AB for VT; we route directly based on vtIndex
 		content: {
@@ -57,7 +62,7 @@ export function generateVTPart(context: PartContext, part: PartProps<VTProps>): 
 				// CASPARCG media object: directly on chosen clip player layer
 				literal<TimelineBlueprintExt<TSR.TimelineContentCCGMedia>>({
 					id: '',
-					enable: { start: 0 },
+					enable: { start: 0, end: part.payload.duration },
 					layer: clipLayer,
 					content: {
 						deviceType: TSR.DeviceType.CASPARCG,
@@ -112,7 +117,7 @@ export function generateVTPart(context: PartContext, part: PartProps<VTProps>): 
 			externalId: part.payload.externalId,
 			title: part.payload.name,
 			expectedDuration: part.payload.duration,
-			autoNext: true,
+			autoNext: false,
 		},
 		pieces,
 		adLibPieces: [...graphics.adLibPieces],

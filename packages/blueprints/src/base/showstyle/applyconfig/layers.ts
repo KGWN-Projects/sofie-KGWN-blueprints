@@ -3,6 +3,8 @@ export enum SourceLayer {
 	Camera = 'cam',
 	Remote = 'remote',
 	VT = 'vt',
+	VT1 = 'vt1',
+	VT2 = 'vt2',
 	VO = 'vo',
 	DVE = 'dve',
 	DVE_RETAIN = 'dveRetain',

@@ -45,7 +45,22 @@ export function getSourceLayer(): ISourceLayer[] {
 			_rank: 100,
 			name: 'VT',
 			abbreviation: 'VT',
-			exclusiveGroup: 'pgm',
+			onPresenterScreen: true,
+		},
+		{
+			_id: SourceLayer.VT1,
+			type: SourceLayerType.VT,
+			_rank: 100,
+			name: 'VT1',
+			abbreviation: 'VT1',
+			onPresenterScreen: true,
+		},
+		{
+			_id: SourceLayer.VT2,
+			type: SourceLayerType.VT,
+			_rank: 100,
+			name: 'VT2',
+			abbreviation: 'VT2',
 			onPresenterScreen: true,
 		},
 		{
