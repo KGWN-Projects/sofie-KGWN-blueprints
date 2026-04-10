@@ -31,6 +31,8 @@ import { generateVOPart } from './vo.js'
 import { generateVTPart } from './vt.js'
 import { BlueprintUserOperationTypes } from '../../studio/userEditOperations/types.js'
 
+let vtLabel: string | undefined
+
 export function generateParts(context: ISegmentUserContext, intermediateSegment: SegmentProps): BlueprintResultSegment {
 	context.logDebug('Generating parts for intermediateSegment: ' + JSON.stringify(intermediateSegment, null, 2))
 	// Create Segment UserEditOperations:
@@ -58,6 +60,10 @@ export function generateParts(context: ISegmentUserContext, intermediateSegment:
 				break
 			case PartType.VT:
 				newPart = generateVTPart(partContext, rawPart as unknown as PartProps<VTProps>)
+				const vtIndex = (rawPart as PartProps<VTProps>).payload.vtIndex
+				if (typeof vtIndex === 'number') {
+					vtLabel = vtIndex % 2 === 0 ? 'VT1' : 'VT2'
+				}
 				break
 			case PartType.VO:
 				newPart = generateVOPart(partContext, rawPart as unknown as PartProps<VOProps>)
@@ -186,7 +192,7 @@ export function generateParts(context: ISegmentUserContext, intermediateSegment:
 
 	return {
 		segment: {
-			name: intermediateSegment.payload.name,
+			name: `${vtLabel}_${intermediateSegment.payload.name}`,
 			userEditOperations: userEditOperationsOnSegment,
 			userEditProperties: {
 				// This is the global properties for the segment - the lock is referencing this segment:

@@ -35,6 +35,33 @@ export function getGlobalActions(
 			},
 			externalId: ingestRundown.externalId,
 		}),
+
+		// New: end VT1 early (cuts immediately)
+		literal<IBlueprintActionManifest>({
+			actionId: ActionId.EndVT1,
+			userData: {},
+			userDataManifest: {},
+			display: {
+				label: t('END VT1'),
+				sourceLayerId: SourceLayer.VT1,
+				outputLayerId: getOutputLayerForSourceLayer(SourceLayer.VT1),
+			},
+			externalId: ingestRundown.externalId,
+		}),
+
+		// New: end VT2 early (cuts immediately)
+		literal<IBlueprintActionManifest>({
+			actionId: ActionId.EndVT2,
+			userData: {},
+			userDataManifest: {},
+			display: {
+				label: t('END VT2'),
+				sourceLayerId: SourceLayer.VT2,
+				outputLayerId: getOutputLayerForSourceLayer(SourceLayer.VT2),
+			},
+			externalId: ingestRundown.externalId,
+		}),
+
 		exampleGraphicNextStepAdlibAction(ingestRundown),
 	]
 }
