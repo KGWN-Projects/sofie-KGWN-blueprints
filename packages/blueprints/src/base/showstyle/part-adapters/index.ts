@@ -62,7 +62,7 @@ export function generateParts(context: ISegmentUserContext, intermediateSegment:
 				newPart = generateVTPart(partContext, rawPart as unknown as PartProps<VTProps>)
 				const vtIndex = (rawPart as PartProps<VTProps>).payload.vtIndex
 				if (typeof vtIndex === 'number') {
-					vtLabel = vtIndex % 2 === 0 ? 'VT1' : 'VT2'
+					vtLabel = vtIndex % 2 === 0 ? 'A' : 'B'
 				}
 				break
 			case PartType.VO:
